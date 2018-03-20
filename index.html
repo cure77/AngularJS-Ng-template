@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ng-file-upload to CF server</title>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <script>
+    
+    var myApp = angular.module('includeExample', ['ui.bootstrap']);
+    myApp.controller('inclCtrl', function($scope) {
+      $scope.scopeVar = 'inclCtrl -- example with ng-init';
+      $scope.dateOptions = {
+        formatYear: 'yyyy',
+        maxDate: new Date(2020, 5, 22),
+        minDate: new Date(),
+        startingDay: 1
+      };
+      
+      $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+      $scope.format = $scope.formats[0];
+      $scope.altInputFormats = ['M!/d!/yyyy'];
+
+      $scope.openCloseStatus = {};
+      $scope.openClose = function(fieldName) {
+        $scope.openCloseStatus[fieldName] = !$scope.openCloseStatus[fieldName];
+      };
+    });
+
+    myApp.controller('someOtherCtrl', function($scope) {
+      $scope.scopeVar = 'someOtherCtrl -- example with ng-init';
+      $scope.dateOptions = {
+        formatYear: 'yyyy',
+        maxDate: new Date(2020, 5, 22),
+        minDate: new Date(),
+        startingDay: 1
+      };
+      
+      $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+      $scope.format = $scope.formats[0];
+      $scope.altInputFormats = ['M!/d!/yyyy'];
+      
+      $scope.openCloseStatus = {};
+      $scope.openClose = function(fieldName) {
+        $scope.openCloseStatus[fieldName] = !$scope.openCloseStatus[fieldName];
+      };
+    });
+    </script>
+</head>
+<body ng-app="includeExample">
+
+    <div>
+        <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+    
+        <h4>Popup</h4>
+
+        <div class="row">
+          <div class="col-md-6">
+            <ng-include src="'datepicker'" ng-controller="inclCtrl as Ctrl" ng-init="initVar = 'firstDate'">
+          </div>
+    
+          <div class="col-md-6">
+              <ng-include src="'datepicker'" ng-controller="someOtherCtrl as Ctrl" ng-init="initVar = 'secondDate'">
+          </div>
+        </div>
+
+    </div>
+
+    <script type="text/ng-template" id="datepicker">
+      {{scopeVar}} <br> {{initVar}}
+      <p class="input-group">
+        <input type="text" 
+        class="form-control" 
+        uib-datepicker-popup="{{format}}" 
+        ng-model="dt" 
+        is-open="openCloseStatus[initVar]" 
+        datepicker-options="dateOptions" 
+        ng-required="true" 
+        close-text="Close" 
+        alt-input-formats="altInputFormats" />
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="openClose(initVar)"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </p>
+    </script>
+    
+
+</body>
+</html>

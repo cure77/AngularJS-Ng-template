@@ -51,7 +51,7 @@
         };
  
  
-        $scope.dateToOptions = $scope.dateOptions;
+        $scope.dateToOptions = $scope.dateOptions; // because we will add different min date dynamically after picking date from
 
         $scope.$watch('dt[dpFromName]', function(newValue, oldValue) {
           if (newValue !== oldValue) {

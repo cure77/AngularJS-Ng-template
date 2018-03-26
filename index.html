@@ -49,14 +49,19 @@
           startingDay: 1,
           ngModelOptions : {timezone: 'utc'}
         };
-       
+ 
  
         $scope.dateToOptions = $scope.dateOptions;
- 
-        $scope.$watch('dt[dpFromName]',function(){
-          $scope.dateToOptions.minDate = $scope.dt[$scope.dpFromName];
-        });       
- 
+
+        $scope.$watch('dt[dpFromName]', function(newValue, oldValue) {
+          if (newValue !== oldValue) {
+            if ($scope.dt[$scope.dpToName] !== undefined && newValue > $scope.dt[$scope.dpToName]){
+              $scope.dt[$scope.dpToName] = null;
+            }
+            $scope.dateToOptions.minDate = $scope.dt[$scope.dpFromName];
+          }
+        });
+
         $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
         $scope.format = $scope.formats[0];
         $scope.altInputFormats = ['M!/d!/yyyy'];

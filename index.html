@@ -56,7 +56,7 @@
         $scope.$watch('dt[dpFromName]', function(newValue, oldValue) {
           if (newValue !== oldValue) {
             if ($scope.dt[$scope.dpToName] !== undefined && newValue > $scope.dt[$scope.dpToName]){
-              $scope.dt[$scope.dpToName] = null;
+              delete $scope.dt[$scope.dpToName];
             }
             $scope.dateToOptions.minDate = $scope.dt[$scope.dpFromName];
           }
@@ -92,7 +92,8 @@
         </div>
  
       <div class="row">
-        <ng-include src="'dateRangePicker'" ng-controller="dateRangePickerCtrl" ng-init="dpFromName='firstRangeDate'; dpToName='secondRangeDate'">
+        <!-- <ng-include src="'dateRangePicker'" ng-controller="dateRangePickerCtrl" ng-init="dpFromName='firstRangeDate'; dpToName='secondRangeDate'"> -->
+        <ng-include src="'datePickerRange.html'" ng-controller="dateRangePickerCtrl" ng-init="dpFromName='firstRangeDate'; dpToName='secondRangeDate'">
       </div>
  
     </div>

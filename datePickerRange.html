@@ -1,0 +1,35 @@
+<div class="col-md-6">
+    From :
+    <p class="input-group">
+      <input type="text"
+      class="form-control"
+      uib-datepicker-popup="{{format}}"
+      ng-model="dt[dpFromName]"
+      is-open="openCloseStatus[dpFromName]"
+      datepicker-options="dateOptions"
+      ng-required="true"
+      close-text="Close"
+      alt-input-formats="altInputFormats" />
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="openClose(dpFromName)"><i class="glyphicon glyphicon-calendar"></i></button>
+      </span>
+    </p>
+</div>
+
+<div class="col-md-6">
+  To:
+  <p class="input-group">
+    <input type="text"
+    class="form-control"
+    uib-datepicker-popup="{{format}}"
+    ng-model="dt[dpToName]"
+    is-open="openCloseStatus[dpToName]"
+    datepicker-options="dateToOptions"
+    ng-required="true"
+    close-text="Close"
+    alt-input-formats="altInputFormats" />
+    <span class="input-group-btn">
+      <button type="button" class="btn btn-default" ng-click="openClose(dpToName)"><i class="glyphicon glyphicon-calendar"></i></button>
+    </span>
+  </p>
+</div>
